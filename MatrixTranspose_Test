@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#defie BUFF_SIZE	(1024) 
+#define BUFF_SIZE	(1024) 
 uint8_t SIDE_LEN = 0;
 uint8_t DataList[BUFF_SIZE];
 uint8_t TransList[BUFF_SIZE];
@@ -22,13 +22,23 @@ void Dis_Matrix(uint8_t *src)
 void MatrixTranspose(uint8_t *src, uint8_t *dst)
 {
 	uint8_t row,column;
-	uint8_t num = 0;
 	
 	for(row = 0; row < SIDE_LEN; row ++)
 	for(column = 0; column < SIDE_LEN; column ++){
 		*(dst+column+row*SIDE_LEN) = *(src+(SIDE_LEN-row-1)+SIDE_LEN*column);
 	}
 }
+//顺时针
+void MatrixTranspose_Foward(uint8_t *src, uint8_t *dst)
+{
+	uint8_t row,column;
+
+	for(row = 0; row < SIDE_LEN; row ++)
+	for(column = 0; column < SIDE_LEN; column ++){
+		*(dst+column+row*SIDE_LEN) = *(src+row+(SIDE_LEN-column-1)*SIDE_LEN);
+	}
+} 
+
 
 //Init data list
 void Create_DataList(void)
@@ -47,7 +57,8 @@ void Transpose_Test(void)
 	printf("------------------Before----------------\r\n");
 	Dis_Matrix(DataList);	
 	printf("------------------After-----------------\r\n");
-	MatrixTranspose(DataList, TransList);
+	//MatrixTranspose(DataList, TransList);
+	MatrixTranspose_Foward(DataList, TransList);
 	Dis_Matrix(TransList);
 }
 
