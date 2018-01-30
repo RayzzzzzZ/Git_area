@@ -7,19 +7,18 @@ uint8_t SIDE_LEN = 0;
 uint8_t DataList[BUFF_SIZE];
 uint8_t TransList[BUFF_SIZE];
 
-void Dis_Matrix(uint8_t *src)
+typedef struct
 {
-	uint8_t i, num = 0;
-	for( i = 0; i < SIDE_LEN*SIDE_LEN; i ++)
-	{
-		printf("%4d  ", *(src+i));
-		num ++;
-		if( (num%SIDE_LEN) == 0)
-			printf("\r\n");
-	}
-}
+	void (*MatrixTranspose_BackWard);
+	void (*MatrixTranspose_Foward);
+	void (*MatrixTranspose_180);
+	void (*MatrixTranspose_yFoward);
+}Matrix_Method_t;
+
+
+
 //逆时针 
-void MatrixTranspose(uint8_t *src, uint8_t *dst)
+void MatrixTranspose_BackWard(uint8_t *src, uint8_t *dst)
 {
 	uint8_t row,column;
 	
@@ -38,7 +37,25 @@ void MatrixTranspose_Foward(uint8_t *src, uint8_t *dst)
 		*(dst+column+row*SIDE_LEN) = *(src+row+(SIDE_LEN-column-1)*SIDE_LEN);
 	}
 } 
+//180度
+void MatrixTranspose_180(uint8_t *src, uint8_t *dst);
+//X轴镜像
+void MatrixTranspose_xMirror(uint8_t *src, uint8_t *dst);
+//y轴镜像 
+void MatrixTranspose_yFoward(uint8_t *src, uint8_t *dst);
 
+
+void Dis_Matrix(uint8_t *src)
+{
+	uint8_t i, num = 0;
+	for( i = 0; i < SIDE_LEN*SIDE_LEN; i ++)
+	{
+		printf("%4d  ", *(src+i));
+		num ++;
+		if( (num%SIDE_LEN) == 0)
+			printf("\r\n");
+	}
+}
 
 //Init data list
 void Create_DataList(void)
