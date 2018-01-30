@@ -45,7 +45,7 @@ void MatrixTranspose_180(uint8_t *src, uint8_t *dst)
 	
 	for(row = 0; row < SIDE_LEN; row ++)
 	for(column = 0; column < SIDE_LEN; column ++){
-		*(dst+column+row*SIDE_LEN) = *(src+SIDE_LEN*SIDE_LEN-1-row*SIDE_LEN+column);
+		*(dst+column+row*SIDE_LEN) = *(src+SIDE_LEN*SIDE_LEN-1-(column+row*SIDE_LEN));
 	}	
 }
 
@@ -101,7 +101,7 @@ void Transpose_Test(void)
 	printf("------------------After-----------------\r\n");
 	//MatrixTranspose_BackWard(DataList, TransList);
 	//MatrixTranspose_Foward(DataList, TransList);
-	//MatrixTranspose_180(DataList, TransList);
+	MatrixTranspose_180(DataList, TransList);
 	//MatrixTranspose_xMirror(DataList, TransList);
 	//MatrixTranspose_yMirror(DataList, TransList);
 	
