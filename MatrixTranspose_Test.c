@@ -42,7 +42,7 @@ void MatrixTranspose_180(uint8_t *src, uint8_t *dst);
 //X轴镜像
 void MatrixTranspose_xMirror(uint8_t *src, uint8_t *dst);
 //y轴镜像 
-void MatrixTranspose_yFoward(uint8_t *src, uint8_t *dst);
+void MatrixTranspose_yMirror(uint8_t *src, uint8_t *dst);
 
 
 void Dis_Matrix(uint8_t *src)
